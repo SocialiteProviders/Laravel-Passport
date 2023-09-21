@@ -49,7 +49,7 @@ class Provider extends AbstractProvider
      */
     protected function getAuthUrl($state)
     {
-        return $this->buildAuthUrlFromBase($this->getLaravelPassportUrl('authorize_uri'), $state);
+        return $this->buildAuthUrlFromBase($this->getLaravelPassportUrl('authorize_uri'), $state).'&prompt=login';
     }
 
     /**
