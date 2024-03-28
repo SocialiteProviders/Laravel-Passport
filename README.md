@@ -21,6 +21,26 @@ Please see the [Base Installation Guide](https://socialiteproviders.com/usage/),
 
 ### Add provider event listener
 
+#### Laravel 11
+
+Manually register the event listener in the `boot` method of your application's `AppServiceProvider`:
+
+```php
+use Illuminate\Support\Facades\Event;
+ 
+/**
+ * Bootstrap any application services.
+ */
+public function boot(): void
+{
+    Event::listen(function (\SocialiteProviders\Manager\SocialiteWasCalled $event) {
+        $event->extendSocialite('laravelpassport', \SocialiteProviders\LaravelPassport\Provider::class);
+    });
+}
+```
+
+#### Laravel 10 and lower
+
 Configure the package's listener to listen for `SocialiteWasCalled` events.
 
 Add the event to your `listen[]` array in `app/Providers/EventServiceProvider`. See the [Base Installation Guide](https://socialiteproviders.com/usage/) for detailed instructions.
